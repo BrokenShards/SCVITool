@@ -6,8 +6,14 @@ form of damage that may occur.
 
 ## Usage
 The SCVI save folder is located in `%localappdata%\SoulcaliburVI\`.<br>
-Backing up will will check if the `Saved` folder exists, and if so create a copy of it in `Saved_Backup`. An existing backup will be overwritten without warning.<br>
-Restoring will check if the `Saved_Backup` folder exists, and if so, it will delete the `Saved` folder and replace it with the contents of `Saved_Backup`.<br>
+Backing up will will check if the `Saved` folder exists, and if so create a copy of it alongside the SCVITools binary.
+Any existing backups on the same slot will be overwritten without warning.<br>
+Restoring will check if a backup exists in the given slot, and if so, it will delete the SCVI `Saved` folder and replace
+it with the backup in the slot.<br>
+
+### WARNING
+SCVITool does not check or verify the save slots, it only checks if the folder exists. If you try to restore a save slot
+that is just an empty folder, your save will be deleted and replaced with an empty folder! You have been warned!<br>
 
 ### GUI
 The GUI application provides an option to set a backup slot and has buttons to backup and restore. That's it.
