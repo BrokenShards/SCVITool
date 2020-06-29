@@ -31,7 +31,8 @@ namespace SCVITool
 		static readonly string About = "SCVITool Version " + Version.ToString();
 		const string Help = "`SCVITool.exe [arg] [index]`\n" +
 		                    "`-b` or `-backup` to perform a backup. The next available slot will be used if an index is not provided.\n" + 
-		                    "`-r` or `-restore` to restore the backup. A slot index must be provided or this will fail.";
+		                    "`-r` or `-restore` to restore the backup. A slot index must be provided or this will fail.\n" +
+		                    "`-d` or `-delete` to delete the backup. A slot index must be provided or this will fail.\n";
 
 		[STAThread]
 		static int Main( string[] args )
@@ -75,6 +76,15 @@ namespace SCVITool
 					if( !SaveManager.Restore( index ) )
 					{
 						Console.Write( "Restoration failed: " );
+						Console.WriteLine( SaveManager.ErrorMessage );
+						return -2;
+					}
+				}
+				else if( arg == "-d" || arg == "-delete" )
+				{
+					if( !SaveManager.Delete( index ) )
+					{
+						Console.Write( "Deletion failed: " );
 						Console.WriteLine( SaveManager.ErrorMessage );
 						return -2;
 					}

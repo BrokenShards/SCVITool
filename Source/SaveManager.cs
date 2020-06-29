@@ -124,6 +124,41 @@ namespace SCVITool
 
 			return true;
 		}
+		public static bool Delete( int index )
+		{
+			if( index < 0 )
+			{
+				ErrorMessage = "Cannot delete an save slot with an invalid index.";
+				return false;
+			}
+
+			string bpath = "save";
+			{
+				if( index < 10 )
+					bpath += '0';
+
+				bpath += index.ToString();
+			}
+
+			if( !Directory.Exists( bpath ) )
+			{
+				ErrorMessage = "Cannot delete data from a slot that does not exist.";
+				return false;
+			}
+		
+
+			try
+			{
+				Directory.Delete( bpath, true );
+			}
+			catch( Exception ex )
+			{
+				ErrorMessage = ex.Message + ".";
+				return false;
+			}
+
+			return true;
+		}
 
 		static void CopyFilesRecursively( DirectoryInfo source, DirectoryInfo target )
 		{

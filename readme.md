@@ -26,6 +26,8 @@ The GUI application provides an option to set a backup slot and has buttons to b
 - Maybe look into how custom characters are stored and implement some way of backing them up individually if possible.
 
 ## Changelog
+### Version 0.2.1
+- Now backups can be deleted with SCVITool.
 
 ### Version 0.2.0
 - Now backups are stored alongside SCVITool.
