@@ -10,11 +10,24 @@ Backing up will will check if the `Saved` folder exists, and if so create a copy
 Restoring will check if the `Saved_Backup` folder exists, and if so, it will delete the `Saved` folder and replace it with the contents of `Saved_Backup`.<br>
 
 ### GUI
-The GUI application provides buttons to backup and restore. That's it.
+The GUI application provides an option to set a backup slot and has buttons to backup and restore. That's it.
 
 ### Console Arguments
-`-b` or `-backup` to perform a backup.<br>
-`-r` or `-restore` to restore the backup.<br>
+`-b [index]` or `-backup [index]` to perform a backup. If the index is ommitted, the next available index will be used.<br>
+`-r [index]` or `-restore [index]` to restore the backup. This will fail if a valid index is not provided.<br>
 
 ## TODO
-- Implement multiple backup "slots" that can be managed in both GUI and console.
+- Maybe look into how custom characters are stored and implement some way of backing them up individually if possible.
+
+## Changelog
+
+### Version 0.2.0
+- Now backups are stored alongside SCVITool.
+- Multiple backup slots are now supported and can be managed in both the GUI and console.
+
+### Version 0.1.1
+- Implemented console functionality and refactored the project.
+
+### Version 0.1.0
+- Initial release.
+

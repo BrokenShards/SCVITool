@@ -7,19 +7,14 @@ namespace SCVITool
 {
 	public static class SaveManager
 	{
-		static readonly string SavePath = Path.Combine( Environment.GetFolderPath( 
-			Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.None ), "SoulcaliburVI" );
-		static readonly string SavedPath  = Path.Combine( SavePath, "Saved" );
-		static readonly string BackupPath = Path.Combine( SavePath, "Saved_Backup" );
-
 		public static string ErrorMessage
 		{
 			get; private set;
 		} = string.Empty;
 
-		public static bool Backup()
+		public static bool Backup( int index = -1 )
 		{
-			if( !Directory.Exists( SavedPath ) )
+			if( !Directory.Exists( Constants.SavedPath ) )
 			{
 				ErrorMessage = "Unable to find save data to backup.";
 				return false;
@@ -30,12 +25,42 @@ namespace SCVITool
 
 			try
 			{
-				savedinfo = new DirectoryInfo( SavedPath );
+				savedinfo = new DirectoryInfo( Constants.SavedPath );
 
-				if( Directory.Exists( BackupPath ) )
-					Directory.Delete( BackupPath, true );
+				if( index < 0 )
+				{
+					string[] files = Directory.GetDirectories( Constants.BackupPath );
 
-				backupinfo = Directory.CreateDirectory( BackupPath );
+					for( int i = 0; i < int.MaxValue && index < 0; i++ )
+					{
+						string name = "save";
+
+						if( i < 10 )
+							name += '0';
+
+						name += i.ToString();
+
+						foreach( string f in files )
+							if( f.ToLower() != name )
+								index = i;
+
+						if( i == int.MaxValue )
+							throw new InvalidOperationException( "The maximum amount of save slots has been reached." );
+					}
+				}
+
+				string bpath = "save";
+				{
+					if( index < 10 )
+						bpath += '0';
+
+					bpath += index.ToString();
+				}
+
+				if( Directory.Exists( bpath ) )
+					Directory.Delete( bpath, true );
+
+				backupinfo = Directory.CreateDirectory( bpath );
 			}
 			catch( Exception ex )
 			{
@@ -55,9 +80,23 @@ namespace SCVITool
 
 			return true;
 		}
-		public static bool Restore()
+		public static bool Restore( int index )
 		{
-			if( !Directory.Exists( BackupPath ) )
+			if( index < 0 )
+			{
+				ErrorMessage = "Cannot restore from an invalid save slot index.";
+				return false;
+			}
+
+			string bpath = "save";
+			{
+				if( index < 10 )
+					bpath += '0';
+
+				bpath += index.ToString();
+			}
+
+			if( !Directory.Exists( bpath ) )
 			{
 				ErrorMessage = "No backup save data to restore.";
 				return false;
@@ -68,12 +107,12 @@ namespace SCVITool
 
 			try
 			{
-				backupinfo = new DirectoryInfo( BackupPath );
+				backupinfo = new DirectoryInfo( bpath );
 
-				if( Directory.Exists( SavedPath ) )
-					Directory.Delete( SavedPath, true );
+				if( Directory.Exists( Constants.SavedPath ) )
+					Directory.Delete( Constants.SavedPath, true );
 
-				savedinfo = new DirectoryInfo( SavedPath );
+				savedinfo = new DirectoryInfo( Constants.SavedPath );
 
 				CopyFilesRecursively( backupinfo, savedinfo );
 			}
