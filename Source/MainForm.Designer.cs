@@ -28,26 +28,30 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.panel1 = new System.Windows.Forms.Panel();
+			this.mainPanel = new System.Windows.Forms.Panel();
 			this.restoreBut = new System.Windows.Forms.Button();
 			this.backupBut = new System.Windows.Forms.Button();
 			this.slocDialog = new System.Windows.Forms.FolderBrowserDialog();
 			this.glocDialog = new System.Windows.Forms.OpenFileDialog();
-			this.panel1.SuspendLayout();
+			this.slotBox = new System.Windows.Forms.MaskedTextBox();
+			this.slotLab = new System.Windows.Forms.Label();
+			this.mainPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// panel1
+			// mainPanel
 			// 
-			this.panel1.Controls.Add(this.restoreBut);
-			this.panel1.Controls.Add(this.backupBut);
-			this.panel1.Location = new System.Drawing.Point(13, 13);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(208, 31);
-			this.panel1.TabIndex = 0;
+			this.mainPanel.Controls.Add(this.slotBox);
+			this.mainPanel.Controls.Add(this.slotLab);
+			this.mainPanel.Controls.Add(this.restoreBut);
+			this.mainPanel.Controls.Add(this.backupBut);
+			this.mainPanel.Location = new System.Drawing.Point(13, 13);
+			this.mainPanel.Name = "mainPanel";
+			this.mainPanel.Size = new System.Drawing.Size(258, 30);
+			this.mainPanel.TabIndex = 0;
 			// 
 			// restoreBut
 			// 
-			this.restoreBut.Location = new System.Drawing.Point(130, 3);
+			this.restoreBut.Location = new System.Drawing.Point(180, 3);
 			this.restoreBut.Name = "restoreBut";
 			this.restoreBut.Size = new System.Drawing.Size(75, 23);
 			this.restoreBut.TabIndex = 7;
@@ -57,7 +61,7 @@
 			// 
 			// backupBut
 			// 
-			this.backupBut.Location = new System.Drawing.Point(3, 3);
+			this.backupBut.Location = new System.Drawing.Point(92, 3);
 			this.backupBut.Name = "backupBut";
 			this.backupBut.Size = new System.Drawing.Size(75, 23);
 			this.backupBut.TabIndex = 6;
@@ -75,26 +79,49 @@
 			this.glocDialog.FileName = "SoulcaliburVI.exe";
 			this.glocDialog.Filter = "SoulcaliburVI Executable|*.exe";
 			// 
+			// slotBox
+			// 
+			this.slotBox.Location = new System.Drawing.Point(46, 5);
+			this.slotBox.Mask = "00";
+			this.slotBox.Name = "slotBox";
+			this.slotBox.PromptChar = ' ';
+			this.slotBox.Size = new System.Drawing.Size(31, 20);
+			this.slotBox.TabIndex = 1;
+			this.slotBox.Text = "00";
+			this.slotBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// slotLab
+			// 
+			this.slotLab.Location = new System.Drawing.Point(5, 3);
+			this.slotLab.Name = "slotLab";
+			this.slotLab.Size = new System.Drawing.Size(37, 23);
+			this.slotLab.TabIndex = 8;
+			this.slotLab.Text = "Slot #";
+			this.slotLab.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(233, 55);
-			this.Controls.Add(this.panel1);
+			this.ClientSize = new System.Drawing.Size(281, 56);
+			this.Controls.Add(this.mainPanel);
 			this.Name = "MainForm";
 			this.Text = "SCVI Tool";
-			this.panel1.ResumeLayout(false);
+			this.mainPanel.ResumeLayout(false);
+			this.mainPanel.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Panel mainPanel;
 		private System.Windows.Forms.FolderBrowserDialog slocDialog;
 		private System.Windows.Forms.OpenFileDialog glocDialog;
 		private System.Windows.Forms.Button restoreBut;
 		private System.Windows.Forms.Button backupBut;
+		private System.Windows.Forms.MaskedTextBox slotBox;
+		private System.Windows.Forms.Label slotLab;
 	}
 }
 

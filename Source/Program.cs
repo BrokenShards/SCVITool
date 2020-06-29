@@ -11,8 +11,8 @@ namespace SCVITool
 		static class Version
 		{
 			public const uint Major = 0;
-			public const uint Minor = 1;
-			public const uint Patch = 1;
+			public const uint Minor = 2;
+			public const uint Patch = 0;
 
 			public new static string ToString()
 			{
@@ -29,7 +29,9 @@ namespace SCVITool
 		}
 
 		static readonly string About = "SCVITool Version " + Version.ToString();
-		const string Help = "`SCVITool.exe [arg]`\n`-b` or `-backup` to perform a backup.\n`-r` or `-restore` to reastore the backup.";
+		const string Help = "`SCVITool.exe [arg] [index]`\n" +
+		                    "`-b` or `-backup` to perform a backup. The next available slot will be used if an index is not provided.\n" + 
+		                    "`-r` or `-restore` to restore the backup. A slot index must be provided or this will fail.";
 
 		[STAThread]
 		static int Main( string[] args )
@@ -38,7 +40,7 @@ namespace SCVITool
 			{
 				Console.WriteLine( About );
 
-				if( args.Length > 1 )
+				if( args.Length > 2 )
 				{
 					Console.WriteLine( Help );
 					return -1;
@@ -46,9 +48,22 @@ namespace SCVITool
 
 				string arg = args[ 0 ].ToLower();
 
+				int index = -1;
+
+				if( args.Length > 1 )
+				{
+					if( !int.TryParse( args[ 1 ], out index ) )
+					{
+						Console.Write( "Unable to parse \"" );
+						Console.Write( args[ 1 ] );
+						Console.WriteLine( "\" as an integer." );
+						return -3;
+					}
+				}
+
 				if( arg == "-b" || arg == "-backup" )
 				{
-					if( !SaveManager.Backup() )
+					if( !SaveManager.Backup( index ) )
 					{
 						Console.Write( "Backup failed: " );
 						Console.WriteLine( SaveManager.ErrorMessage );
@@ -57,7 +72,7 @@ namespace SCVITool
 				}
 				else if( arg == "-r" || arg == "-restore" )
 				{
-					if( !SaveManager.Restore() )
+					if( !SaveManager.Restore( index ) )
 					{
 						Console.Write( "Restoration failed: " );
 						Console.WriteLine( SaveManager.ErrorMessage );

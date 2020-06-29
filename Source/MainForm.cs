@@ -1,7 +1,6 @@
 ﻿// MainForm.cs //
 
 using System;
-using System.IO;
 using System.Windows.Forms;
 
 namespace SCVITool
@@ -15,12 +14,20 @@ namespace SCVITool
 		
 		private void BackupClicked( object sender, EventArgs e )
 		{
-			if( !SaveManager.Backup() )
+			int index = -1;
+
+			slotBox.Text = slotBox.Text.Trim();
+
+			if( !int.TryParse( slotBox.Text, out index ) || !SaveManager.Backup( index ) )
 				MessageBox.Show( this, SaveManager.ErrorMessage, "Backup failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
 		}
 		private void RestoreClicked( object sender, EventArgs e )
 		{
-			if( !SaveManager.Restore() )
+			int index = -1;
+
+			slotBox.Text = slotBox.Text.Trim();
+
+			if( !int.TryParse( slotBox.Text, out index ) || !SaveManager.Restore( index ) )
 				MessageBox.Show( this, SaveManager.ErrorMessage, "Restore failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
 		}
 	}
