@@ -69,6 +69,7 @@ namespace SCVITool
 						bpath += '0';
 
 					bpath += index.ToString();
+					bpath = Path.Combine( Constants.BackupPath, bpath );
 				}
 
 				if( Directory.Exists( bpath ) )
@@ -108,6 +109,7 @@ namespace SCVITool
 					bpath += '0';
 
 				bpath += index.ToString();
+				bpath = Path.Combine( Constants.BackupPath, bpath );
 			}
 
 			if( !Directory.Exists( bpath ) )
@@ -152,6 +154,7 @@ namespace SCVITool
 					bpath += '0';
 
 				bpath += index.ToString();
+				bpath = Path.Combine( Constants.BackupPath, bpath );
 			}
 
 			if( !Directory.Exists( bpath ) )
@@ -160,7 +163,6 @@ namespace SCVITool
 				return false;
 			}
 		
-
 			try
 			{
 				Directory.Delete( bpath, true );
