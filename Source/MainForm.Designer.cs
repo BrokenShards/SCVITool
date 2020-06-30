@@ -1,4 +1,20 @@
-﻿namespace SCVITool
+﻿//
+// MainForm.Designer.cs
+//
+// SCVITool - A simple SCVI save backup manager.
+// Copyright (C) 2020 Michael Furlong
+//
+// This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public
+// License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any 
+// later version.
+// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+// warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License along with this program.If not, 
+// see<https://www.gnu.org/licenses/>.
+//
+
+namespace SCVITool
 {
 	partial class MainForm
 	{
@@ -29,13 +45,11 @@
 		private void InitializeComponent()
 		{
 			this.mainPanel = new System.Windows.Forms.Panel();
+			this.delBut = new System.Windows.Forms.Button();
 			this.slotBox = new System.Windows.Forms.MaskedTextBox();
 			this.slotLab = new System.Windows.Forms.Label();
 			this.restoreBut = new System.Windows.Forms.Button();
 			this.backupBut = new System.Windows.Forms.Button();
-			this.slocDialog = new System.Windows.Forms.FolderBrowserDialog();
-			this.glocDialog = new System.Windows.Forms.OpenFileDialog();
-			this.delBut = new System.Windows.Forms.Button();
 			this.mainPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -50,6 +64,16 @@
 			this.mainPanel.Name = "mainPanel";
 			this.mainPanel.Size = new System.Drawing.Size(333, 30);
 			this.mainPanel.TabIndex = 0;
+			// 
+			// delBut
+			// 
+			this.delBut.Location = new System.Drawing.Point(254, 3);
+			this.delBut.Name = "delBut";
+			this.delBut.Size = new System.Drawing.Size(75, 23);
+			this.delBut.TabIndex = 9;
+			this.delBut.Text = "Delete";
+			this.delBut.UseVisualStyleBackColor = true;
+			this.delBut.Click += new System.EventHandler(this.DeleteClicked);
 			// 
 			// slotBox
 			// 
@@ -91,26 +115,6 @@
 			this.backupBut.UseVisualStyleBackColor = true;
 			this.backupBut.Click += new System.EventHandler(this.BackupClicked);
 			// 
-			// slocDialog
-			// 
-			this.slocDialog.RootFolder = System.Environment.SpecialFolder.LocalApplicationData;
-			// 
-			// glocDialog
-			// 
-			this.glocDialog.DefaultExt = "exe";
-			this.glocDialog.FileName = "SoulcaliburVI.exe";
-			this.glocDialog.Filter = "SoulcaliburVI Executable|*.exe";
-			// 
-			// delBut
-			// 
-			this.delBut.Location = new System.Drawing.Point(254, 3);
-			this.delBut.Name = "delBut";
-			this.delBut.Size = new System.Drawing.Size(75, 23);
-			this.delBut.TabIndex = 9;
-			this.delBut.Text = "Delete";
-			this.delBut.UseVisualStyleBackColor = true;
-			this.delBut.Click += new System.EventHandler(this.DeleteClicked);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -128,8 +132,6 @@
 		#endregion
 
 		private System.Windows.Forms.Panel mainPanel;
-		private System.Windows.Forms.FolderBrowserDialog slocDialog;
-		private System.Windows.Forms.OpenFileDialog glocDialog;
 		private System.Windows.Forms.Button restoreBut;
 		private System.Windows.Forms.Button backupBut;
 		private System.Windows.Forms.MaskedTextBox slotBox;
