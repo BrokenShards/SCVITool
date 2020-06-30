@@ -21,12 +21,16 @@ The GUI application provides an option to set a backup slot and has buttons to b
 ### Console Arguments
 `-b [index]` or `-backup [index]` to perform a backup. If the index is ommitted, the next available index will be used.<br>
 `-r [index]` or `-restore [index]` to restore the backup. This will fail if a valid index is not provided.<br>
+`-d [index]` or `-delete [index]` to delete the backup. This will fail if a valid index is not provided.<br>
 
 ## TODO
+- Add a way to list used save slots.
+- Detect and delete empty save slot folders.
+
 - Maybe look into how custom characters are stored and implement some way of backing them up individually if possible.
 
 ## Changelog
-### Version 0.2.1
+### Version 0.2.0a
 - Now backups can be deleted with SCVITool.
 
 ### Version 0.2.0
